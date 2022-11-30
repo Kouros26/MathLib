@@ -18,16 +18,16 @@ namespace lm
 
 		Mat3()
 		{
-			this->matrix[0] = Vec3<T>(1, 0, 0);
-			this->matrix[1] = Vec3<T>(0, 1, 0);
-			this->matrix[2] = Vec3<T>(0, 0, 1);
+			this->matrix[0] = Vec3<T>(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0));
+			this->matrix[1] = Vec3<T>(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0));
+			this->matrix[2] = Vec3<T>(static_cast<T>(0), static_cast<T>(0), static_cast<T>(1));
 		}
 
 		explicit Mat3(const T init)
 		{
-			this->matrix[0] = Vec3<T>(init, 0, 0);
-			this->matrix[1] = Vec3<T>(0, init, 0);
-			this->matrix[2] = Vec3<T>(0, 0, init);
+			this->matrix[0] = Vec3<T>(init, static_cast<T>(0), static_cast<T>(0));
+			this->matrix[1] = Vec3<T>(static_cast<T>(0), init, static_cast<T>(0));
+			this->matrix[2] = Vec3<T>(static_cast<T>(0), static_cast<T>(0), init);
 		}
 
 		Mat3(const Vec3<T>& v1, const Vec3<T>& v2, const Vec3<T>& v3)
@@ -49,12 +49,6 @@ namespace lm
 				this->matrix[i] = Vec3<T>(mat4[i].X(), mat4[i].Y(), mat4[i].Z());
 		}
 
-		Mat3(Mat3<T>&& mat3) noexcept
-		{
-			for (unsigned int i = 0; i < 3; i++)
-				this->matrix[i] = std::move(mat3.matrix[i]);
-		}
-
 		Mat3<T>& operator=(const Mat3<T>& mat3)
 		{
 			if (this == &mat3)
@@ -62,17 +56,6 @@ namespace lm
 
 			for (unsigned int i = 0; i < 3; i++)
 				this->matrix[i] = mat3.matrix[i];
-
-			return *this;
-		}
-
-		Mat3<T>& operator=(Mat3<T>&& mat3) noexcept
-		{
-			if (this == &mat3)
-				return *this;
-
-			for (unsigned int i = 0; i < 3; i++)
-				this->matrix[i] = std::move(mat3.matrix[i]);
 
 			return *this;
 		}
@@ -131,7 +114,7 @@ namespace lm
 			}
 		}
 
-		Mat3<T> Scale(const float scale) const
+		Mat3<T> Scale(const T scale) const
 		{
 			Mat3<T> mat3(*this);
 			for (unsigned int i = 0; i < 3; i++)
@@ -144,7 +127,7 @@ namespace lm
 			return mat3;
 		}
 
-		Mat3<T>& Scale(const float scale)
+		Mat3<T>& Scale(const T scale)
 		{
 			for (unsigned int i = 0; i < 3; i++)
 			{

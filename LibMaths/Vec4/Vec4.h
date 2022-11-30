@@ -1,16 +1,9 @@
 #pragma once
 #include <limits>
 #include <algorithm>
-#include "../Vec3/Vec3.h"
-
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
 #include <ostream>
 
-#ifndef HALF_CIRCLE
-	#define HALF_CIRCLE 180.0f
-#endif
+#include "../Vec3/Vec3.h"
 
 namespace lm
 {
@@ -79,22 +72,14 @@ namespace lm
 			this->w = vec4.w;
 		}
 
-		Vec4(Vec4<T>&& vec4) noexcept
-		{
-			this->x = std::move(vec4.x);
-			this->y = std::move(vec4.y);
-			this->z = std::move(vec4.z);
-			this->w = std::move(vec4.w);
-		}
-
 		double static RadiansToDegrees(const T rad)
 		{
-			return rad * (HALF_CIRCLE / M_PI);
+			return rad * (Constants::HALF_CIRCLE / Constants::M_PI);
 		}
 
 		double static DegreesToRadians(const T deg)
 		{
-			return deg * (M_PI / HALF_CIRCLE);
+			return deg * (Constants::M_PI / Constants::HALF_CIRCLE);
 		}
 
 		Vec4& operator=(const Vec4<T>& vec4)
@@ -106,19 +91,6 @@ namespace lm
 			this->y = vec4.y;
 			this->z = vec4.z;
 			this->w = vec4.w;
-
-			return *this;
-		}
-
-		Vec4& operator=(Vec4<T>&& vec4) noexcept
-		{
-			if (this == &vec4)
-				return *this;
-
-			this->x = std::move(vec4.x);
-			this->y = std::move(vec4.y);
-			this->z = std::move(vec4.z);
-			this->w = std::move(vec4.w);
 
 			return *this;
 		}

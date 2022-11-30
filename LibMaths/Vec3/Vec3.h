@@ -1,13 +1,6 @@
 #pragma once
 #include <limits>
-
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
-
-#ifndef HALF_CIRCLE
-	#define HALF_CIRCLE 180.0f
-#endif
+#include "Constants.h"
 
 namespace lm
 {
@@ -64,13 +57,6 @@ namespace lm
 			this->z = vec3.z;
 		}
 
-		Vec3(Vec3<T>&& vec3) noexcept
-		{
-			this->x = std::move(vec3.x);
-			this->y = std::move(vec3.y);
-			this->z = std::move(vec3.z);
-		}
-
 		Vec3& operator=(const Vec3<T>& vec3)
 		{
 			if (this == &vec3)
@@ -79,18 +65,6 @@ namespace lm
 			this->x = vec3.x;
 			this->y = vec3.y;
 			this->z = vec3.z;
-
-			return *this;
-		}
-
-		Vec3& operator=(Vec3<T>&& vec3) noexcept
-		{
-			if (this == &vec3)
-				return *this;
-
-			this->x = std::move(vec3.x);
-			this->y = std::move(vec3.y);
-			this->z = std::move(vec3.z);
 
 			return *this;
 		}
@@ -423,12 +397,12 @@ namespace lm
 
 		double static RadiansToDegrees(const double rad)
 		{
-			return rad * (HALF_CIRCLE / M_PI);
+			return rad * (Constants::HALF_CIRCLE / Constants::M_PI);
 		}
 
 		double static DegreesToRadians(const double deg)
 		{
-			return deg * (M_PI / HALF_CIRCLE);
+			return deg * (Constants::M_PI / Constants::HALF_CIRCLE);
 		}
 	};
 

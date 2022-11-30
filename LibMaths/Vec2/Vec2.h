@@ -3,14 +3,8 @@
 #include <iostream>
 #include <string>
 #include "../Vec4/Vec4.h"
+#include "Constants.h"
 
-#ifndef M_PI
-	#define M_PI 3.14159265358979323846
-#endif
-
-#ifndef HALF_CIRCLE
-	#define HALF_CIRCLE 180.0f
-#endif
 
 namespace lm
 {
@@ -72,12 +66,6 @@ namespace lm
 			this->y = vec3.Y();
 		}
 
-		Vec2(Vec2<T>&& vec2) noexcept
-		{
-			this->x = std::move(vec2.x);
-			this->y = std::move(vec2.y);
-		}
-
 		Vec2<T>& operator=(const Vec2<T>& vec2)
 		{
 			if (this == &vec2)
@@ -85,17 +73,6 @@ namespace lm
 
 			this->x = vec2.x;
 			this->y = vec2.y;
-
-			return *this;
-		}
-		
-		Vec2<T>& operator=(Vec2<T>&& vec2) noexcept
-		{
-			if (this == &vec2)
-				return *this;
-
-			this->x = std::move(vec2.x);
-			this->y = std::move(vec2.y);
 
 			return *this;
 		}
@@ -371,12 +348,12 @@ namespace lm
 
 		double static RadiansToDegrees(const double rad)
 		{
-			return rad * (HALF_CIRCLE / M_PI);
+			return rad * (Constants::HALF_CIRCLE / Constants::M_PI);
 		}
 
 		double static DegreesToRadians(const double deg)
 		{
-			return deg * (M_PI / HALF_CIRCLE);
+			return deg * (Constants::M_PI / Constants::HALF_CIRCLE);
 		}
 	};
 

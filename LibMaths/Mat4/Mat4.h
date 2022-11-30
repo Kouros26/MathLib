@@ -45,12 +45,6 @@ namespace lm
 				this->matrix[i] = mat4.matrix[i];
 		}
 
-		Mat4(Mat4<T>&& mat4) noexcept
-		{
-			for (unsigned int i = 0; i < 4; i++)
-				this->matrix[i] = std::move(mat4.matrix[i]);
-		}
-
 		Mat4<T>& operator=(const Mat4<T>& mat4)
 		{
 			if (this == &mat4)
@@ -58,17 +52,6 @@ namespace lm
 
 			for (unsigned int i = 0; i < 4; i++)
 				this->matrix[i] = mat4.matrix[i];
-
-			return *this;
-		}
-
-		Mat4<T>& operator=(Mat4<T>&& mat4) noexcept
-		{
-			if (this == &mat4)
-				return *this;
-
-			for (unsigned int i = 0; i < 4; i++)
-				this->matrix[i] = std::move(mat4.matrix[i]);
 
 			return *this;
 		}
